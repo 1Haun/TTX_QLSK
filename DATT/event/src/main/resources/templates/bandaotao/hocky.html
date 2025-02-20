@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thống kê</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div>
+    <div>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="http://localhost:8080/bandaotao">
+                    <img th:src="@{/image/FBT_logo.png}" alt="Logo" width="30" height="24"
+                         class="d-inline-block align-text-top">
+                    Portal Event
+                </a>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar (Chiếm 2 cột) -->
+            <div class="col-2 bg-body-tertiary vh-100 p-3">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/thongke">
+                            <img th:src="@{/image/chart.png}" width="30" height="30">
+                            <span class="ms-3">Thống kê</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/kehoach">
+                            <img th:src="@{/image/plan.png}" width="30" height="30">
+                            <span class="ms-3">Quản lý kế hoạch sự kiện</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/bomon">
+                            <img th:src="@{/image/subject.png}" width="30" height="30">
+                            <span class="ms-3">Quản lý bộ môn</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/theloai">
+                            <img th:src="@{/image/category.png}" width="30" height="30">
+                            <span class="ms-3">Quản lý thể loại</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/doituong">
+                            <img th:src="@{/image/object.png}" width="30" height="30">
+                            <span class="ms-3">Quản lý đối tượng</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/hocky">
+                            <img th:src="@{/image/semester.png}" width="30" height="30">
+                            <span class="ms-3">Quản lý học kì</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Nội dung chính (Chiếm 10 cột) -->
+            <div class="col-10 p-4">
+                <div class="col-2 bg-white">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center"
+                               href="http://localhost:8080/bandaotao/hocky">
+                                <img th:src="@{/image/semester.png}" width="30" height="30">
+                                <span class="ms-3">Học kỳ</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="container mt-3">
+                    <div class="card p-3">
+                        <h5><i class="bi bi-funnel"></i> Học kỳ</h5>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="p-3 border rounded bg-light">
+                                    <h6><i class="bi bi-sliders"></i> Bộ lọc</h6>
+                                    <div class="mb-2 d-flex justify-content-center">
+                                        <label for="search" class="me-2 align-self-center">Tìm kiếm:</label>
+                                        <input type="text" id="search" class="form-control w-50"
+                                               placeholder="Tìm kiếm theo mã, tên">
+                                    </div>
+                                    <div class="mt-3 text-center">
+                                        <button class="btn btn-dark">Tìm kiếm</button>
+                                        <button class="btn btn-secondary">Làm mới bộ lọc</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card p-3 mt-3">
+                        <h5><i class="bi bi-list"></i> Danh sách Học kỳ</h5>
+                        <div class="d-flex justify-content-end mb-2">
+                            <button class="btn btn-dark">Thêm Học kỳ</button>
+                        </div>
+                        <table class="table table-bordered mt-2">
+                            <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Tên học kỳ</th>
+                                <th>Thời gian bắt đầu</th>
+                                <th>Thời gian kết thúc</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>No data</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm">Sửa</button>
+                                    <button class="btn btn-danger btn-sm">Xóa</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
