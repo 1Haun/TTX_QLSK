@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thống kê</title>
+    <title>Thể loại</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
@@ -146,8 +146,9 @@
                             <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Tên thể loạin</th>
+                                <th>Tên thể loại</th>
                                 <th>Trạng thái</th>
+                                <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -164,11 +165,11 @@
                                     </button>
                                 </td>
                                 <div class="modal fade" id="editTheLoaiModalLabel" tabindex="-1"
-                                     aria-labelledby="editTheLoaiModalLabel" aria-hidden="true">
+                                     aria-labelledby="modal" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="editTheLoaiModalLabel">Chỉnh sửa bộ môn</h5>
+                                                <h5 class="modal-title" id="modal">Chỉnh sửa bộ môn</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
