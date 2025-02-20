@@ -4,6 +4,9 @@ import org.example.event.entity.BoMon;
 import org.example.event.repository.BoMonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +21,29 @@ public class BoMonController {
     @Autowired
     private BoMonRepository boMonRepository;
     @GetMapping("/bandaotao/bomon")
-    public String danhSachBoMon(Model model) {
-        List<BoMon> bomonList = boMonRepository.findAll();
-        model.addAttribute("bomon", new BoMon()); // Để hiển thị form
-        model.addAttribute("bomonList", bomonList); // Danh sách bộ môn
-        return "bandaotao/bomon"; // Trả về trang Thymeleaf
+    public String danhSachBoMon(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "10") int size,
+                                @RequestParam(required = false) String keyword,
+                                Model model) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<BoMon> bomonPage;
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            bomonPage = boMonRepository.findBoMonByCodeOrName(keyword, pageable);
+            model.addAttribute("keyword", keyword); // Giữ lại keyword sau khi tìm kiếm
+        } else {
+            bomonPage = boMonRepository.findAll(pageable);
+        }
+
+        model.addAttribute("bomon", new BoMon());
+        model.addAttribute("bomonPage", bomonPage);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", bomonPage.getTotalPages());
+
+        return "bandaotao/bomon";
     }
+
+
     @PostMapping("/bandaotao/bomon/add")
     public String addDepartment(@ModelAttribute BoMon boMon, RedirectAttributes redirectAttributes) {
         try{
