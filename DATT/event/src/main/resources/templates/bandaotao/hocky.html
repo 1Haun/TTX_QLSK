@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thống kê</title>
+    <title>Học Kỳ</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
@@ -95,12 +95,47 @@
                         </div>
                     </div>
 
-                    <div class="card p-3 mt-3">
-                        <h5><i class="bi bi-list"></i> Danh sách Học kỳ</h5>
-                        <div class="d-flex justify-content-end mb-2">
-                            <button class="btn btn-dark">Thêm Học kỳ</button>
-                        </div>
-                        <table class="table table-bordered mt-2">
+<!--                    <div class="card p-3 mt-3">-->
+<!--                        <h5><i class="bi bi-list"></i> Danh sách Học kỳ</h5>-->
+<!--                        <div class="d-flex justify-content-end mb-2">-->
+<!--                            <button class="btn btn-dark">Thêm Học kỳ</button>-->
+<!--                        </div>-->
+<!--                        <table class="table table-bordered mt-2">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th>STT</th>-->
+<!--                                <th>Tên học kỳ</th>-->
+<!--                                <th>Thời gian bắt đầu</th>-->
+<!--                                <th>Thời gian kết thúc</th>-->
+<!--                                <th>Trạng thái</th>-->
+<!--                                <th>Hành động</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="hocky, index : ${hocKyList}">-->
+<!--                                <td th:text="${index.index + 1}">1</td>-->
+<!--                                <td th:text="${hocky.name}">Tên học kỳ</td>-->
+<!--                                <td th:text="${hocky.startDate}">Ngày bắt đầu</td>-->
+<!--                                <td th:text="${hocky.endDate}">Ngày kết thúc</td>-->
+<!--                                <td th:text="${hocky.status}">Trạng thái</td>-->
+<!--                                <td>-->
+<!--                                    <button class="btn btn-primary btn-sm">Sửa</button>-->
+<!--                                    <button class="btn btn-danger btn-sm">Xóa</button>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+                    <!DOCTYPE html>
+                    <html xmlns:th="http://www.thymeleaf.org">
+                    <head>
+                        <title>Quản lý Học Kỳ</title>
+                        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+                    </head>
+                    <body>
+                    <div class="container mt-4">
+                        <h2>Danh sách Học Kỳ</h2>
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>STT</th>
@@ -108,25 +143,43 @@
                                 <th>Thời gian bắt đầu</th>
                                 <th>Thời gian kết thúc</th>
                                 <th>Trạng thái</th>
-                                <th>Hành động</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>No data</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Sửa</button>
-                                    <button class="btn btn-danger btn-sm">Xóa</button>
-                                </td>
+                            <tr th:each="hocky, index : ${listHocKy}">
+                                <td th:text="${index.index + 1}"></td>
+                                <td th:text="${hocky.name}"></td>
+                                <td th:text="${hocky.startDate}"></td>
+                                <td th:text="${hocky.endDate}"></td>
+                                <td th:text="${hocky.status}"></td>
                             </tr>
                             </tbody>
                         </table>
+
+                        <!-- Form thêm mới -->
+                        <h3>Thêm Học Kỳ Mới</h3>
+                        <form th:action="@{/bandaotao/hocky/add}" method="post">
+                            <div class="mb-2">
+                                <label>Tên học kỳ:</label>
+                                <input type="text" name="name" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label>Ngày bắt đầu:</label>
+                                <input type="date" name="startDate" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label>Ngày kết thúc:</label>
+                                <input type="date" name="endDate" class="form-control" required>
+                            </div>
+                            <div class="mb-2">
+                                <label>Trạng thái:</label>
+                                <input type="text" name="status" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                        </form>
                     </div>
+                    </body>
+                    </html>
                 </div>
             </div>
         </div>
