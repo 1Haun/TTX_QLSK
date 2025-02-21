@@ -5,28 +5,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-<div class="container mt-3">
-    <div class="card p-3">
-        <h5><i class="bi bi-list"></i> Danh sách Thể Loại</h5>
-        <div class="d-flex justify-content-end mb-2">
-            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-                Thêm Thể Loại
-            </button>
-        </div>
 
-        <!-- Modal Thêm Thể Loại -->
-        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Thêm Thể Loại Mới</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form th:action="@{/bandaotao/theloai/add}" method="post">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Tên Thể Loại</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Lưu</button>
                         </form>
