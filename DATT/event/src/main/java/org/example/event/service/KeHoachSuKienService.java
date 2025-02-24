@@ -18,6 +18,20 @@ public class KeHoachSuKienService {
     public Page<KeHoachSuKien> searchKeHoach(
             String tenKeHoach, String hocKy, String trangThai, String boMon, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
+
+        if (tenKeHoach != null && tenKeHoach.trim().isEmpty()) {
+            tenKeHoach = null;
+        }
+        if (hocKy != null && hocKy.trim().isEmpty()) {
+            hocKy = null;
+        }
+        if (trangThai != null && trangThai.trim().isEmpty()) {
+            trangThai = null;
+        }
+        if (boMon != null && boMon.trim().isEmpty()) {
+            boMon = null;
+        }
+
         return repository.searchAndFilter(tenKeHoach, hocKy, trangThai, boMon, pageable);
     }
 }
