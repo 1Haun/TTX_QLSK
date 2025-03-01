@@ -27,9 +27,30 @@ public class HocKyController {
 
     // Xử lý thêm học kỳ mới
     @PostMapping("/bandaotao/hocky/add")
-    public String addHocKy(@RequestParam String name, @RequestParam String startDate,
-                           @RequestParam String endDate, @RequestParam String status) {
+    public String addHocKy(@RequestParam String name,
+                           @RequestParam String startDate,
+                           @RequestParam String endDate,
+                           @RequestParam String status) {
         HocKy hocKy = new HocKy();
+        hocKy.setName(name);
+        hocKy.setStartDate(LocalDate.parse(startDate));
+        hocKy.setEndDate(LocalDate.parse(endDate));
+        hocKy.setStatus(status);
+
+        hocKyRepository.save(hocKy);
+        return "redirect:/bandaotao/hocky";
+    }
+
+    // Xử lý cập nhật học kỳ
+    @PostMapping("/bandaotao/hocky/update")
+    public String updateHocKy(@RequestParam Long id,
+                              @RequestParam String name,
+                              @RequestParam String startDate,
+                              @RequestParam String endDate,
+                              @RequestParam String status) {
+        HocKy hocKy = hocKyRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid HocKy Id:" + id));
+
         hocKy.setName(name);
         hocKy.setStartDate(LocalDate.parse(startDate));
         hocKy.setEndDate(LocalDate.parse(endDate));
