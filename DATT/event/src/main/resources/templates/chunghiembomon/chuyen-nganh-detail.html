@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết Chuyên ngành</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Chi tiết Chuyên ngành</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <td th:text="${chuyenNganh.id}"></td>
+        </tr>
+        <tr>
+            <th>Mã chuyên ngành</th>
+            <td th:text="${chuyenNganh.maChuyenNganh}"></td>
+        </tr>
+        <tr>
+            <th>Tên chuyên ngành</th>
+            <td th:text="${chuyenNganh.tenChuyenNganh}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/chunghiembomon/chuyen-nganh}" class="btn btn-secondary">Quay lại</a>
+</div>
+</body>
+</html>
