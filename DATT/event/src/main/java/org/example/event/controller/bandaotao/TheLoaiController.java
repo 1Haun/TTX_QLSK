@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -50,7 +49,7 @@ public class TheLoaiController {
 
 
     @PostMapping("/bandaotao/theloai/add")
-    public String addDepartment(@ModelAttribute TheLoai theLoai, RedirectAttributes redirectAttributes) {
+    public String addCategory(@ModelAttribute TheLoai theLoai, RedirectAttributes redirectAttributes) {
         try{
             theLoaiRepository.save(theLoai);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm thể loại thành công thành công!");

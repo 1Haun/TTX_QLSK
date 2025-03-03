@@ -1,7 +1,9 @@
 package org.example.event.controller.bandaotao;
 
+import org.example.event.entity.TheLoai;
 import org.example.event.service.KeHoachSuKienService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -9,9 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.example.event.entity.KeHoachSuKien;
 import org.example.event.repository.KeHoachSuKienRepository;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class KeHoachController {
@@ -53,5 +59,29 @@ public class KeHoachController {
 
         return "bandaotao/kehoach";
     }
+    @PostMapping("/bandaotao/kehoach/add")
+    public String addKeHoach(@ModelAttribute KeHoachSuKien kh, RedirectAttributes redirectAttributes) {
+        try {
+            System.out.println("🟢 Nhận dữ liệu từ form: " + kh);
+
+            // Lưu vào database
+            kHRepository.save(kh);
+
+            // Kiểm tra lại xem đã có trong DB chưa
+            Optional<KeHoachSuKien> savedKH = kHRepository.findById(kh.getId());
+            if (savedKH.isPresent()) {
+                System.out.println("✅ Đã lưu vào DB: " + savedKH.get());
+            } else {
+                System.out.println("❌ Lưu thất bại!");
+            }
+
+            redirectAttributes.addFlashAttribute("successMessage", "Thêm kế hoạch thành công!");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi thêm kế hoạch: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return "redirect:/bandaotao/kehoach";
+    }
+
 
 }
