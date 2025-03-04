@@ -1,7 +1,6 @@
 package org.example.event.controller.bandaotao;
 
 import org.example.event.entity.DoiTuong;
-import org.example.event.entity.TheLoai;
 import org.example.event.repository.DoiTuongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -72,4 +71,5 @@ public class DoiTuongController {
         }
         return "redirect:/bandaotao/doituong";
     }
+
 }
