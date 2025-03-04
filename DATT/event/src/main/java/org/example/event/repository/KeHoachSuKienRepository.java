@@ -20,4 +20,6 @@ public interface KeHoachSuKienRepository extends JpaRepository<KeHoachSuKien, Lo
             @Param("trangThai") String trangThai,
             @Param("boMon") String boMon,
             Pageable pageable);
+    boolean existsByTenKeHoach(String tenKeHoach);
+
 }
