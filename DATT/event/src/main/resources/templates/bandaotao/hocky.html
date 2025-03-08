@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Quản lý Học Kỳ</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -67,8 +67,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="hocky, index : ${listHocKy}">
-                    <td th:text="${index.index + 1}"></td>
+                <tr th:each="hocky, index : ${hocKyPage.content}">
+                    <td th:text="${index.index + 1 + currentPage * 5}"></td>
                     <td th:text="${hocky.name}"></td>
                     <td th:text="${hocky.startDate}"></td>
                     <td th:text="${hocky.endDate}"></td>
@@ -76,17 +76,36 @@
                     <td>
                         <button class="btn btn-warning btn-sm"
                                 th:attr="data-id=${hocky.id},
-                                         data-name=${hocky.name},
-                                         data-start-date=${hocky.startDate},
-                                         data-end-date=${hocky.endDate},
-                                         data-status=${hocky.status}"
+                         data-name=${hocky.name},
+                         data-start-date=${hocky.startDate},
+                         data-end-date=${hocky.endDate},
+                         data-status=${hocky.status}"
                                 onclick="showUpdateForm(this)">
                             Sửa
                         </button>
                     </td>
                 </tr>
                 </tbody>
+
             </table>
+            <div>
+                <nav>
+                    <ul class="pagination">
+                        <li th:if="${currentPage > 0}" class="page-item">
+                            <a class="page-link" th:href="@{/bandaotao/hocky(page=${currentPage - 1})}">Trước</a>
+                        </li>
+
+                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage} ? 'active' : ''" class="page-item">
+                            <a class="page-link" th:href="@{/bandaotao/hocky(page=${i})}" th:text="${i + 1}"></a>
+                        </li>
+
+                        <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                            <a class="page-link" th:href="@{/bandaotao/hocky(page=${currentPage + 1})}">Sau</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
             <!-- Nút Add -->
             <button class="btn btn-primary mb-3" onclick="showAddForm()">Thêm Học Kỳ Mới</button>
@@ -115,6 +134,7 @@
                     <button type="button" class="btn btn-secondary" onclick="hideAddForm()">Hủy</button>
                 </form>
             </div>
+
 
             <!-- Form cập nhật (ẩn mặc định) -->
             <div id="updateForm" style="display: none;" class="mt-3">
@@ -146,6 +166,7 @@
 </div>
 
 <!-- Script JavaScript -->
+
 <script>
     function showAddForm() {
         document.getElementById('addForm').style.display = 'block';
