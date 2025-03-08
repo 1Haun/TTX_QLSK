@@ -32,73 +32,81 @@
                         <h5><i class="bi bi-funnel"></i>Sự kiện</h5>
                         <div class="row">
                             <!-- Bộ lọc -->
-                            <div class="col-md-12">
-                                <div class="p-3 border rounded bg-light">
-                                    <h6><i class="bi bi-sliders"></i> Bộ lọc</h6>
+                            <h6><i class="bi bi-sliders"></i> Bộ lọc</h6>
+                            <div class="row">
+                                <form th:action="@{/truongbandaotao/quanlysukien}" th:method="get">
                                     <div class="row">
-<!--                                        <form>-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-md-3">-->
-<!--                                                    <label for="hocKy">Học kỳ:</label>-->
-<!--                                                    <select id="hocKy" name="hocKy" class="form-control">-->
-<!--                                                        <option value="">Chọn học kỳ</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-md-3">-->
-<!--                                                    <label for="trangThai">Trạng thái:</label>-->
-<!--                                                    <select id="trangThai" name="trangThai" class="form-control">-->
-<!--                                                        <option value="">Chọn trạng thái</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <div class="mt-3 text-center">-->
-<!--                                                <button type="submit" class="btn btn-dark">Tìm kiếm</button>-->
-<!--                                                <a th:href="" class="btn btn-secondary">Làm-->
-<!--                                                    mới bộ lọc</a>-->
-<!--                                            </div>-->
-<!--                                        </form>-->
+                                        <div class="col-md-3">
+                                            <label for="hocKy">Học kỳ:</label>
+                                            <select id="hocKy" name="hocKy" class="form-control">
+                                                <option value="">Chọn học kỳ</option>
+                                                <option th:each="hocKy : ${danhSachHocKy}"
+                                                        th:value="${hocKy}"
+                                                        th:text="${hocKy}"
+                                                        th:selected="${hocKy == selectedHocKy}">
+                                                </option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="trangThai">Trạng thái:</label>
+                                            <select id="trangThai" name="trangThai" class="form-control">
+                                                <option value="">Chọn trạng thái</option>
+                                                <option th:each="trangThai : ${danhSachTrangThai}"
+                                                        th:value="${trangThai}"
+                                                        th:text="${trangThai}"
+                                                        th:selected="${trangThai == selectedTrangThai}">
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="mt-3 text-center">
+                                        <button type="submit" class="btn btn-dark">Tìm kiếm</button>
+                                        <a th:href="@{/truongbandaotao/quanlysukien}" class="btn btn-secondary">Làm
+                                            mới bộ lọc</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Danh sách kế hoạch sự kiện -->
-                    <div class="card p-3 mt-3">
-                        <h5><i class="bi bi-calendar-event"></i> Danh sách kế hoạch sự kiện</h5>
-                        <table class="table table-bordered mt-2">
-                            <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên kế hoạch</th>
-                                <th>Bộ môn</th>
-                                <th>Học kỳ</th>
-                                <th>Trạng thái</th>
-                                <th>Lead kế hoạch</th>
-                                <th>Chức năng</th>
-                            </tr>
-                            </thead>
-                            <tbody th:unless="${#lists.isEmpty(keHoachList)}">
-                            <tr th:each="keHoach, iterStat : ${keHoachList}">
-                                <td th:text="${iterStat.count}"></td>
-                                <td th:text="${keHoach.tenKeHoach}"></td>
-                                <td th:text="${keHoach.boMon}"></td>
-                                <td th:text="${keHoach.hocKy}"></td>
-                                <td th:text="${keHoach.trangThai}"></td>
-                                <td th:text="${keHoach.leadKeHoach}"></td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">Chi tiết</button>
-                                    <button class="btn btn-success btn-sm">Xuất Excel</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
                 </div>
+            </div>
+
+            <!-- Danh sách kế hoạch sự kiện -->
+            <div class="card p-3 mt-3">
+                <h5><i class="bi bi-calendar-event"></i> Danh sách kế hoạch sự kiện</h5>
+                <table class="table table-bordered mt-2">
+                    <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên kế hoạch</th>
+                        <th>Bộ môn</th>
+                        <th>Học kỳ</th>
+                        <th>Trạng thái</th>
+                        <th>Lead kế hoạch</th>
+                        <th>Chức năng</th>
+                    </tr>
+                    </thead>
+                    <tbody th:unless="${#lists.isEmpty(keHoachList)}">
+                    <tr th:each="keHoach, iterStat : ${keHoachList}">
+                        <td th:text="${iterStat.count}"></td>
+                        <td th:text="${keHoach.tenKeHoach}"></td>
+                        <td th:text="${keHoach.boMon}"></td>
+                        <td th:text="${keHoach.hocKy}"></td>
+                        <td th:text="${keHoach.trangThai}"></td>
+                        <td th:text="${keHoach.leadKeHoach}"></td>
+                        <td>
+                            <button class="btn btn-primary btn-sm">Chi tiết</button>
+                            <button class="btn btn-success btn-sm">Xuất Excel</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 </body>
 </html>
