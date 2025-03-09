@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Kế Hoạch</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <!-- Breadcrumb điều hướng -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/bandaotao/kehoach}">Danh sách Kế hoạch</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chi Tiết Kế Hoạch</li>
+        </ol>
+    </nav>
+
+    <!-- Tiêu đề -->
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h4>Chi Tiết Kế Hoạch Sự Kiện</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th>ID</th>
+                    <td th:text="${keHoach.id}"></td>
+                </tr>
+                <tr>
+                    <th>Tên Kế Hoạch</th>
+                    <td th:text="${keHoach.tenKeHoach}"></td>
+                </tr>
+                <tr>
+                    <th>Bộ Môn</th>
+                    <td th:text="${keHoach.boMon}"></td>
+                </tr>
+                <tr>
+                    <th>Học Kỳ</th>
+                    <td th:text="${keHoach.hocKy}"></td>
+                </tr>
+                <tr>
+                    <th>Trạng Thái</th>
+                    <td>
+                        <span th:text="${keHoach.trangThai}"
+                              th:classappend="${keHoach.trangThai == 'Hoàn thành' ? 'badge bg-success'
+                                             : (keHoach.trangThai == 'Đang thực hiện' ? 'badge bg-warning'
+                                             : 'badge bg-secondary')}">
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Lead Kế Hoạch</th>
+                    <td th:text="${keHoach.leadKeHoach}"></td>
+                </tr>
+                <tr>
+                    <th>Số Lượng Sự Kiện</th>
+                    <td th:text="${keHoach.soLuongSuKien}"></td>
+                </tr>
+            </table>
+        </div>
+        <div class="card-footer">
+            <a th:href="@{/bandaotao/kehoach}" class="btn btn-secondary">Quay lại</a>
+            <a th:href="@{/bandaotao/kehoach/edit/{id}(id=${keHoach.id})}" class="btn btn-warning">Chỉnh sửa</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -6,13 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.example.event.entity.KeHoachSuKien;
 import org.example.event.repository.KeHoachSuKienRepository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -80,6 +77,18 @@ public class QuanLiKeHoachController {
             e.printStackTrace();
         }
         return "redirect:/bandaotao/kehoach";
+    }
+    @GetMapping("/bandaotao/kehoach/detail/{id}")
+    public String viewKeHoachDetail(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        Optional<KeHoachSuKien> keHoachOptional = kHService.findById(id);
+
+        if (keHoachOptional.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy kế hoạch!");
+            return "redirect:/bandaotao/kehoach";
+        }
+
+        model.addAttribute("keHoach", keHoachOptional.get());
+        return "bandaotao/kehoachdetail";
     }
 
 
