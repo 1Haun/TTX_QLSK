@@ -178,7 +178,7 @@
                                 <td th:text="${keHoach.trangThai}"></td>
                                 <td th:text="${keHoach.leadKeHoach}"></td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm">Chi tiết</button>
+                                    <a th:href="@{/bandaotao/kehoach/detail/{id}(id=${keHoach.id})}" class="btn btn-warning">Xem chi tiết</a>
                                     <button class="btn btn-danger btn-sm">Xuất Excel</button>
                                 </td>
                             </tr>
