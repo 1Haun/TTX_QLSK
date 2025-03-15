@@ -116,7 +116,11 @@
                                                 <label for="hocKy" class="form-label">Học kỳ</label>
                                                 <select class="form-control" id="hocKy1" name="hocKy">
                                                     <option value="">Chọn học kỳ</option>
-                                                    <option th:each="hocKy : ${danhSachHocKy}" th:value="${hocKy}" th:text="${hocKy}"></option>
+                                                    <option th:each="hocKy : ${danhSachHocKy}"
+                                                            th:value="${hocKy.id}"
+                                                            th:text="${hocKy.name}"
+                                                            th:selected="${hocKy.id == selectedHocKy}">
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
@@ -127,7 +131,11 @@
                                                 <label for="boMon" class="form-label">Bộ môn</label>
                                                 <select class="form-control" id="boMon" name="boMon" required>
                                                     <option value="">Chọn bộ môn</option>
-                                                    <option th:each="bm : ${danhSachBoMon}" th:value="${bm}" th:text="${bm}"></option>
+                                                    <option th:each="boMon : ${danhSachBoMon}"
+                                                            th:value="${boMon.id}"
+                                                            th:text="${boMon.name}"
+                                                            th:selected="${boMon.id == selectedBoMon}">
+                                                    </option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
