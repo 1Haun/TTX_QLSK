@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Điểm danh Sự Kiện</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div>
+    <div th:insert="~{fragment/header-fragment :: header}"></div>
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-2 bg-light vh-100 p-3">
+            <div th:insert="~{fragment/menu-student-fragment :: menu-student}"></div>
+        </div>
+        <!-- Main Content -->
+        <div class="col-10 p-4">
+            <h2 class="text-center">Điểm Danh Sự Kiện</h2>
+
+            <div class="card p-3 mt-3">
+                <h5><i class="bi bi-qr-code"></i> Nhập Mã Điểm Danh</h5>
+                <form th:action="@{/sinhvien/diem-danh}" method="post" id="diemDanhForm">
+                    <div class="mb-3">
+                        <label for="maDiemDanh">Nhập mã điểm danh:</label>
+                        <input type="text" class="form-control" id="maDiemDanh" name="maDiemDanh" required>
+                    </div>
+                    <button type="submit" class="btn btn-success" id="btnXacNhan">
+                        <i class="bi bi-check-circle"></i> Xác nhận
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    document.getElementById("diemDanhForm").addEventListener("submit", function(event) {
+        alert("✅ Điểm danh thành công!");
+    });
+</script>
+</html>
