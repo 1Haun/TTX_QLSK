@@ -53,6 +53,7 @@ public class QuanLiKeHoachController {
         model.addAttribute("danhSachTrangThai", danhSachTrangThai);
         model.addAttribute("danhSachBoMon", danhSachBoMon);
 
+        model.addAttribute("currentPage", page);
         // Truyền giá trị đã chọn để giữ lại sau khi submit
         model.addAttribute("selectedHocKy", hocKy);
         model.addAttribute("selectedTrangThai", trangThai);
