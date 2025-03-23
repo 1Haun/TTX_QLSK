@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface HocKyRepository extends JpaRepository<HocKy, Long> {
-    Page<HocKy> findAll(Pageable pageable);
+    Page<HocKy> findByNameContainingIgnoreCase(String name, Pageable pageable);
 }

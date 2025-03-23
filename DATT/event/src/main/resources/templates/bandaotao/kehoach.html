@@ -171,7 +171,7 @@
                             </thead>
                             <tbody th:unless="${#lists.isEmpty(keHoachList)}">
                             <tr th:each="keHoach, iterStat : ${keHoachList}">
-                                <td th:text="${iterStat.count}"></td>
+                                <td th:text="${iterStat.index + 1 + currentPage * 10}"></td>
                                 <td th:text="${keHoach.tenKeHoach}"></td>
                                 <td th:text="${keHoach.boMon}"></td>
                                 <td th:text="${keHoach.hocKy}"></td>

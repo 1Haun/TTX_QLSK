@@ -25,17 +25,25 @@ public class HocKyController {
     @GetMapping("/bandaotao/hocky")
     public String getHocKyPage(Model model,
                                @RequestParam(defaultValue = "0") int page,
-                               @RequestParam(defaultValue = "10") int size) {
+                               @RequestParam(defaultValue = "10") int size,
+                               @RequestParam(required = false) String keyword) {
+
         Pageable pageable = PageRequest.of(page, size);
-        Page<HocKy> hocKyPage = hocKyRepository.findAll(pageable);
+
+        Page<HocKy> hocKyPage;
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            hocKyPage = hocKyRepository.findByNameContainingIgnoreCase(keyword.trim(), pageable);
+        } else {
+            hocKyPage = hocKyRepository.findAll(pageable);
+        }
 
         model.addAttribute("hocKyPage", hocKyPage);
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", hocKyPage.getTotalPages());
+        model.addAttribute("keyword", keyword);
 
         return "bandaotao/hocky";
     }
-
 
 
     // Xử lý thêm học kỳ mới
