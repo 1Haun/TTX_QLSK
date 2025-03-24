@@ -24,16 +24,20 @@
                 <!-- Form đăng ký -->
                 <form th:action="@{/sinhvien/sukien/dangky}" th:object="${sinhVienSuKien}" method="post">
                     <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label class="form-label">Mã sinh viên:</label>
+                            <!-- Gán readonly để không chỉnh sửa -->
+                            <input type="hidden" th:field="*{sinhVien.id}" />
+                            <input type="text" class="form-control" th:value="*{sinhVien.maSinhVien}" readonly />
+                        </div>
                         <div class="col-md-6">
                             <label class="form-label">Tên sinh viên:</label>
                             <!-- Gán readonly để không chỉnh sửa -->
                             <input type="hidden" th:field="*{sinhVien.id}" />
                             <input type="text" class="form-control" th:value="*{sinhVien.hoTen}" readonly />
-
-
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <label class="form-label">Thể loại:</label>
                             <input type="text" class="form-control" th:field="*{theLoai}" required/>
                         </div>

@@ -1,41 +1,79 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Điểm danh Sự Kiện</title>
+    <title>Điểm danh sự kiện</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
-<div>
-    <div th:insert="~{fragment/header-fragment :: header}"></div>
+<div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
         <div class="col-2 bg-light vh-100 p-3">
-            <div th:insert="~{fragment/menu-student-fragment :: menu-student}"></div>
+            <div th:insert="~{fragment/menu-sv-fragment :: menu-sv}"></div>
         </div>
-        <!-- Main Content -->
+
+        <!-- Main content -->
         <div class="col-10 p-4">
-            <h2 class="text-center">Điểm Danh Sự Kiện</h2>
-
-            <div class="card p-3 mt-3">
-                <h5><i class="bi bi-qr-code"></i> Nhập Mã Điểm Danh</h5>
-                <form th:action="@{/sinhvien/diem-danh}" method="post" id="diemDanhForm">
-                    <div class="mb-3">
-                        <label for="maDiemDanh">Nhập mã điểm danh:</label>
-                        <input type="text" class="form-control" id="maDiemDanh" name="maDiemDanh" required>
+            <h3><i class="bi bi-filter"></i> Bộ lọc</h3>
+            <form method="get" th:action="@{/sinhvien/diemdanh}">
+                <div class="row mb-3 bg-light p-3 rounded">
+                    <div class="col-md-6">
+                        <label class="form-label">Tên sinh viên:</label>
+                        <input type="text" class="form-control" name="hoTen">
                     </div>
-                    <button type="submit" class="btn btn-success" id="btnXacNhan">
-                        <i class="bi bi-check-circle"></i> Xác nhận
-                    </button>
-                </form>
-            </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Chuyên ngành:</label>
+                        <select class="form-select" name="chuyenNganh">
+                            <option value="">-- Chọn chuyên ngành --</option>
+                            <option value="KTPM">KTPM</option>
+                            <option value="HTTT">HTTT</option>
+                            <option value="CNTT">CNTT</option>
+                            <option value="ATTT">ATTT</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-label">Học kỳ:</label>
+                        <select class="form-select" name="hocKy">
+                            <option value="">-- Chọn học kỳ --</option>
+                            <option value="HK1">HK1</option>
+                            <option value="HK2">HK2</option>
+                            <option value="HK3">HK3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-label">Bộ môn:</label>
+                        <input type="text" class="form-control" name="boMon">
+                    </div>
+                    <div class="col-md-12 text-center mt-3">
+                        <button type="submit" class="btn btn-dark">Lưu</button>
+                    </div>
+                </div>
+            </form>
 
+            <h4 class="mt-4">Danh sách điểm danh</h4>
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sinh viên</th>
+                    <th>Học kỳ</th>
+                    <th>Bộ môn</th>
+                    <th>Chuyên ngành</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sk, iterStat : ${suKiens}">
+                    <td th:text="${iterStat.index + 1}">1</td>
+                    <td th:if="${sk.sinhVien != null}" th:text="${sk.sinhVien.hoTen}">Tên</td>
+                    <td th:unless="${sk.sinhVien != null}">[Không có sinh viên]</td>
+                    <td th:text="${sk.hocKy}">HK1</td>
+                    <td th:text="${sk.boMon}">CNTT</td>
+                    <td th:text="${sk.chuyenNganh}">KTPM</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
 </body>
-<script>
-    document.getElementById("diemDanhForm").addEventListener("submit", function(event) {
-        alert("✅ Điểm danh thành công!");
-    });
-</script>
 </html>
