@@ -1,7 +1,9 @@
 package org.example.event.controller.sinhvien;
 
+import org.example.event.entity.BoMon;
 import org.example.event.entity.SinhVien;
 import org.example.event.entity.SinhVienSuKien;
+import org.example.event.repository.BoMonRepository;
 import org.example.event.repository.SinhVienRepository;
 import org.example.event.repository.SinhVienSuKienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +25,15 @@ public class SinhVienSuKienController {
     @Autowired
     private SinhVienRepository sinhVienRepository;
 
+
+
     // Hiển thị form đăng ký sự kiện
     @GetMapping("/dangky")
     public String showFormDangKy(Model model) {
+
         SinhVien sv = sinhVienRepository.findById(1L).orElse(null); // giả lập
         SinhVienSuKien sk = new SinhVienSuKien();
         sk.setSinhVien(sv); // gán sẵn để binding dữ liệu
-
         model.addAttribute("sinhVienSuKien", sk);
         return "sinhvien/dang_ky_su_kien";
     }

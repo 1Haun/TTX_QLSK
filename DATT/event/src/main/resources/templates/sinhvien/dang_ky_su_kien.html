@@ -60,16 +60,12 @@
                             <input type="text" class="form-control" th:field="*{block}" required/>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Chuyên ngành:</label>
-                            <input type="text" class="form-control" th:field="*{chuyenNganh}" required/>
+                            <label class="form-label">Học kỳ:</label>
+                            <input type="text" class="form-control" th:field="*{hocKy}" required/>
                         </div>
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Học kỳ:</label>
-                            <input type="text" class="form-control" th:field="*{hocKy}" required/>
-                        </div>
                         <div class="col-md-6">
                             <label class="form-label">Mục tiêu hướng đến sự kiện:</label>
                             <input type="text" class="form-control" th:field="*{mucTieuHuongDenSuKien}" required/>
@@ -93,7 +89,6 @@
                             <th>Thời gian</th>
                             <th>Bộ môn</th>
                             <th>Block</th>
-                            <th>Chuyên ngành</th>
                             <th>Học kỳ</th>
                             <th>Mục tiêu</th>
                         </tr>
@@ -105,7 +100,6 @@
                             <td th:text="${#temporals.format(sk.thoiGianBatDau, 'dd/MM/yyyy HH:mm')}"></td>
                             <td th:text="${sk.boMon}"></td>
                             <td th:text="${sk.block}"></td>
-                            <td th:text="${sk.chuyenNganh}"></td>
                             <td th:text="${sk.hocKy}"></td>
                             <td th:text="${sk.mucTieuHuongDenSuKien}"></td>
                         </tr>

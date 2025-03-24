@@ -21,28 +21,28 @@
                         <label class="form-label">Tên sinh viên:</label>
                         <input type="text" class="form-control" name="hoTen">
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Chuyên ngành:</label>
-                        <select class="form-select" name="chuyenNganh">
-                            <option value="">-- Chọn chuyên ngành --</option>
-                            <option value="KTPM">KTPM</option>
-                            <option value="HTTT">HTTT</option>
-                            <option value="CNTT">CNTT</option>
-                            <option value="ATTT">ATTT</option>
-                        </select>
-                    </div>
                     <div class="col-md-6 mt-2">
-                        <label class="form-label">Học kỳ:</label>
-                        <select class="form-select" name="hocKy">
-                            <option value="">-- Chọn học kỳ --</option>
-                            <option value="HK1">HK1</option>
-                            <option value="HK2">HK2</option>
-                            <option value="HK3">HK3</option>
+                        <label for="hocKy">Học kỳ:</label>
+                        <select id="hocKy" name="hocKy" class="form-control">
+                            <option value="">Chọn học kỳ</option>
+                            <option th:each="hocKy : ${danhSachHocKy}"
+                                    th:value="${hocKy.id}"
+                                    th:text="${hocKy.name}"
+                                    th:selected="${hocKy.id == selectedHocKy}">
+                            </option>
+
                         </select>
                     </div>
                     <div class="col-md-6 mt-2">
                         <label class="form-label">Bộ môn:</label>
-                        <input type="text" class="form-control" name="boMon">
+                        <select id="boMon" name="boMon" class="form-control">
+                            <option value="">Chọn bộ môn</option>
+                            <option th:each="boMon : ${danhSachBoMon}"
+                                    th:value="${boMon.id}"
+                                    th:text="${boMon.name}"
+                                    th:selected="${boMon.id == selectedBoMon}">
+                            </option>
+                        </select>
                     </div>
                     <div class="col-md-12 text-center mt-3">
                         <button type="submit" class="btn btn-dark">Lưu</button>

@@ -1,7 +1,11 @@
 package org.example.event.controller.sinhvien;
 
 
+import org.example.event.entity.BoMon;
+import org.example.event.entity.HocKy;
 import org.example.event.entity.SinhVienSuKien;
+import org.example.event.repository.BoMonRepository;
+import org.example.event.repository.HocKyRepository;
 import org.example.event.repository.SinhVienSuKienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +22,11 @@ public class DiemDanhController {
 
     @Autowired
     private SinhVienSuKienRepository sinhVienSuKienRepository;
+    @Autowired
+    private BoMonRepository boMonRepository;
+
+    @Autowired
+    private HocKyRepository hocKyRepository;
 
     @GetMapping
     public String showDiemDanh(
@@ -26,7 +35,10 @@ public class DiemDanhController {
             @RequestParam(required = false) String hocKy,
             @RequestParam(required = false) String boMon,
             Model model) {
-
+        List<BoMon> danhSachBoMon = boMonRepository.findAll();
+        List<HocKy> danhSachHocKy = hocKyRepository.findAll();
+        model.addAttribute("danhSachHocKy", danhSachHocKy);
+        model.addAttribute("danhSachBoMon", danhSachBoMon);
         List<SinhVienSuKien> filtered = sinhVienSuKienRepository.findAll().stream()
                 .filter(sk -> (hoTen == null || sk.getSinhVien().getHoTen().toLowerCase().contains(hoTen.toLowerCase())))
                 .filter(sk -> (chuyenNganh == null || sk.getChuyenNganh().toLowerCase().contains(chuyenNganh.toLowerCase())))
