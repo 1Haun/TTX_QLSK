@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Quản lý Học Kỳ</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid">
+    <div th:insert="~{fragment/header-fragment :: header}"></div>
+    <div class="row">
+        <!-- Sidebar (giữ nguyên như code cũ của bạn) -->
+        <div class="col-2 bg-body-tertiary vh-100 p-3">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/thongke">
+                        <img th:src="@{/image/chart.png}" width="30" height="30">
+                        <span class="ms-3">Thống kê</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/kehoach">
+                        <img th:src="@{/image/plan.png}" width="30" height="30">
+                        <span class="ms-3">Quản lý kế hoạch sự kiện</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="http://localhost:8080/bandaotao/bomon">
+                        <img th:src="@{/image/subject.png}" width="30" height="30">
+                        <span class="ms-3">Quản lý bộ môn</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center" href="http://localhost:8080/quanlydaotao/hocky-qldt">
+                        <img th:src="@{/image/semester.png}" width="30" height="30">
+                        <span class="ms-3">Quản lý học kì</span>
+                    </a>
+                </li>
+
+                <!-- Các mục sidebar khác nếu cần -->
+            </ul>
+        </div>
+
+        <!-- Nội dung chính -->
+        <div class="col-10 p-4">
+            <h2>Danh sách Học Kỳ</h2>
+            <form class="mb-4" method="get" th:action="@{/quanlydaotao/hocky-qldt}">
+                <div class="input-group mb-3">
+                    <input type="text" name="keyword" class="form-control" placeholder="Tìm kiếm theo tên học kỳ">
+                    <button class="btn btn-primary" type="submit">Tìm kiếm</button>
+                    <a th:href="@{/quanlydaotao/hocky-qldt}" class="btn btn-secondary ms-2">Làm mới</a>
+                </div>
+            </form>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên học kỳ</th>
+                    <th>Thời gian bắt đầu</th>
+                    <th>Thời gian kết thúc</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="hocky, index : ${hocKyPage.content}">
+                    <td th:text="${index.index + 1 + currentPage * 10}"></td>
+                    <td th:text="${hocky.name}"></td>
+                    <td th:text="${hocky.startDate}"></td>
+                    <td th:text="${hocky.endDate}"></td>
+                    <td th:text="${hocky.status}"></td>
+                </tr>
+                </tbody>
+
+            </table>
+            <div>
+                <nav>
+                    <ul class="pagination">
+                        <li th:if="${currentPage > 0}" class="page-item">
+                            <a class="page-link" th:href="@{/quanlydaotao/hocky-qldt(page=${currentPage - 1})}">Trước</a>
+                        </li>
+
+                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage} ? 'active' : ''" class="page-item">
+                            <a class="page-link" th:href="@{/quanlydaotao/hocky-qldt(page=${i})}" th:text="${i + 1}"></a>
+                        </li>
+
+                        <li th:if="${currentPage < totalPages - 1}" class="page-item">
+                            <a class="page-link" th:href="@{/quanlydaotao/hocky-qldt(page=${currentPage + 1})}">Sau</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
