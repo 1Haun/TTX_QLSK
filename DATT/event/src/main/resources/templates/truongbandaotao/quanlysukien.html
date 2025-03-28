@@ -184,7 +184,10 @@
                                 <td th:text="${keHoach.trangThai}"></td>
                                 <td th:text="${keHoach.leadKeHoach}"></td>
                                 <td>
-                                    <button class="btn btn-primary btn-sm">Chi tiết</button>
+                                    <a th:href="@{/truongbandaotao/chitiet(id=${keHoach.id})}"
+                                       class="btn btn-primary btn-sm">
+                                        Chi tiết
+                                    </a>
                                     <button class="btn btn-success btn-sm">Xuất Excel</button>
                                 </td>
                             </tr>

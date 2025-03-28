@@ -57,6 +57,23 @@ public class SuKienController {
         return "/truongbandaotao/quanlysukien";
     }
 
+
+    @GetMapping("/truongbandaotao/chitiet")
+    public String xemChiTietKeHoach(@RequestParam Long id, Model model, RedirectAttributes redirectAttributes) {
+        System.out.println(" Đang tìm kế hoạch với ID: " + id);
+
+        Optional<KeHoachSuKien> keHoachOpt = kHRepository.findById(id);
+        if (keHoachOpt.isEmpty()) {
+            System.out.println(" Không tìm thấy kế hoạch với ID: " + id);
+            redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy kế hoạch!");
+            return "redirect:/truongbandaotao/quanlysukien"; // Sửa lại cho đúng
+        }
+
+        model.addAttribute("keHoach", keHoachOpt.get());
+        return "truongbandaotao/chitiet";
+    }
+}
+
 //    @PostMapping("/truongbandaotao/quanlysukien/add")
 //    public String addKeHoach(@ModelAttribute KeHoachSuKien kh, RedirectAttributes redirectAttributes) {
 //        try {
@@ -87,4 +104,4 @@ public class SuKienController {
 //        }
 //        return "redirect:/truongbandaotao/quanlysukien";
 //    }
-}
+

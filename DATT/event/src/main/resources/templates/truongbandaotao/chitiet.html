@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết Kế hoạch</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header-title {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .info-row {
+            padding: 10px 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #495057;
+        }
+        .back-btn {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="header-title">Chi tiết Kế hoạch</div>
+            <div class="card-body">
+                <div class="info-row">
+                    <span class="info-label"> Tên kế hoạch:</span>
+                    <span th:text="${keHoach.tenKeHoach}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label"> Học kỳ:</span>
+                    <span th:text="${keHoach.hocKy}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label"> Bộ môn:</span>
+                    <span th:text="${keHoach.boMon}"></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label"> Trạng thái:</span>
+                    <span class="badge"
+                          th:text="${keHoach.trangThai}"
+                          th:classappend="${keHoach.trangThai == 'Đã duyệt' ? 'bg-success' : (keHoach.trangThai == 'Chờ duyệt' ? 'bg-warning' : 'bg-danger')}">
+                    </span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label"> Lead kế hoạch:</span>
+                    <span th:text="${keHoach.leadKeHoach}"></span>
+                </div>
+                <div class="mt-4">
+                    <a th:href="@{/truongbandaotao/quanlysukien}" class="btn btn-primary back-btn"> Quay lại</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
