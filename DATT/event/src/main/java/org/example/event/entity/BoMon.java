@@ -20,10 +20,10 @@ public class BoMon {
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
-    @Column(name = "mailLead", nullable = false, length = 255)
+    @Column(name = "mail_lead", nullable = false, length = 255)
     private String mailLead;
 
-    @Column(name = "nameLead", nullable = false, length = 255)
+    @Column(name = "name_lead", nullable = false, length = 255)
     private String nameLead;
 
     @Column(name = "status", nullable = false)

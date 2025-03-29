@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Chỉnh sửa Bộ Môn</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Chỉnh sửa Bộ Môn</h2>
+  <form th:action="@{/quanlydaotao/quanlybomon/update}" method="post">
+    <input type="hidden" name="id" th:value="${bomon.id}">
+    <div class="mb-3">
+      <label>Mã Bộ Môn:</label>
+      <input type="text" class="form-control" name="code" th:value="${bomon.code}" required>
+    </div>
+    <div class="mb-3">
+      <label>Tên Bộ Môn:</label>
+      <input type="text" class="form-control" name="name" th:value="${bomon.name}" required>
+    </div>
+    <div class="mb-3">
+      <label>Trưởng Bộ Môn:</label>
+      <input type="text" class="form-control" name="nameLead" th:value="${bomon.nameLead}" required>
+    </div>
+    <div class="mb-3">
+      <label>Email:</label>
+      <input type="email" class="form-control" name="mailLead" th:value="${bomon.mailLead}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a th:href="@{/quanlydaotao/quanlybomon}" class="btn btn-secondary">Hủy</a>
+  </form>
+</div>
+</body>
+</html>
