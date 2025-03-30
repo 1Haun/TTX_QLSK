@@ -1,6 +1,10 @@
 package org.example.event.controller.chunghiembomon;
 
+import org.example.event.entity.BoMon;
+import org.example.event.entity.HocKy;
 import org.example.event.entity.KeHoachSuKien;
+import org.example.event.repository.BoMonRepository;
+import org.example.event.repository.HocKyRepository;
 import org.example.event.repository.KeHoachSuKienRepository;
 import org.example.event.service.KeHoachSuKienService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,12 @@ public class KeHoachSKController {
     @Autowired
     private KeHoachSuKienService kHService;
 
+    @Autowired
+    private BoMonRepository boMonRepository;
+
+    @Autowired
+    private HocKyRepository hocKyRepository;
+
     @GetMapping("/chunghiembomon/kehoach")
     public String keHoach(
             @RequestParam(required = false) String tenKeHoach,
@@ -35,9 +45,9 @@ public class KeHoachSKController {
             Model model) {
 
         // Lấy danh sách các học kỳ, trạng thái và bộ môn từ database hoặc enum
-        List<String> danhSachHocKy = List.of("Học kỳ 1", "Học kỳ 2", "Học kỳ 3");
+        List<HocKy> danhSachHocKy = hocKyRepository.findAll();
         List<String> danhSachTrangThai = List.of("Chờ duyệt", "Đã duyệt", "Từ chối");
-        List<String> danhSachBoMon = List.of("Toán", "Lý", "Hóa", "Sinh");
+        List<BoMon> danhSachBoMon = boMonRepository.findAll();
 
         // Truyền danh sách vào Model
         model.addAttribute("danhSachHocKy", danhSachHocKy);

@@ -28,7 +28,7 @@ public class KeHoachSuKien {
     private String hocKy;
 
     @Column(name = "trang_thai", nullable = false, length = 255)
-    private String trangThai; // Trạng thái (ví dụ: "Đã duyệt", "Chờ duyệt")
+    private String trangThai = "Chờ duyệt"; // Trạng thái (ví dụ: "Đã duyệt", "Chờ duyệt")
 
     @Column(name = "lead_ke_hoach", nullable = false, length = 255)
     private String leadKeHoach;

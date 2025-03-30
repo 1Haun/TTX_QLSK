@@ -43,8 +43,8 @@
                                                     <select id="hocKy" name="hocKy" class="form-control">
                                                         <option value="">Chọn học kỳ</option>
                                                         <option th:each="hocKy : ${danhSachHocKy}"
-                                                                th:value="${hocKy}"
-                                                                th:text="${hocKy}"
+                                                                th:value="${hocKy.id}"
+                                                                th:text="${hocKy.name}"
                                                                 th:selected="${hocKy == selectedHocKy}">
                                                         </option>
 
@@ -66,8 +66,8 @@
                                                     <select id="boMon" name="boMon" class="form-control">
                                                         <option value="">Chọn bộ môn</option>
                                                         <option th:each="boMon : ${danhSachBoMon}"
-                                                                th:value="${boMon}"
-                                                                th:text="${boMon}"
+                                                                th:value="${boMon.id}"
+                                                                th:text="${boMon.name}"
                                                                 th:selected="${boMon == selectedBoMon}">
                                                         </option>
                                                     </select>
@@ -129,8 +129,8 @@
                                                 <label for="hocKy" class="form-label">Học kỳ</label>
                                                 <select class="form-control" id="hocKy1" name="hocKy">
                                                     <option value="">Chọn học kỳ</option>
-                                                    <option th:each="hocKy : ${danhSachHocKy}" th:value="${hocKy}"
-                                                            th:text="${hocKy}"></option>
+                                                    <option th:each="hocKy : ${danhSachHocKy}" th:value="${hocKy.id}"
+                                                            th:text="${hocKy.name}"></option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
@@ -142,15 +142,14 @@
                                                 <label for="boMon" class="form-label">Bộ môn</label>
                                                 <select class="form-control" id="boMon" name="boMon" required>
                                                     <option value="">Chọn bộ môn</option>
-                                                    <option th:each="bm : ${danhSachBoMon}" th:value="${bm}"
-                                                            th:text="${bm}"></option>
+                                                    <option th:each="bm : ${danhSachBoMon}" th:value="${bm.id}"
+                                                            th:text="${bm.name}"></option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="trangThai" class="form-label">Trạng thái</label>
-                                                <select class="form-control" id="trangThai" name="trangThai" required>
+                                                <select class="form-control" id="trangThai" name="trangThai" disabled required>
                                                     <option value="Chờ duyệt">Chờ duyệt</option>
-                                                    <option value="Đã duyệt">Đã duyệt</option>
                                                     <option value="Hủy">Hủy</option>
                                                 </select>
                                             </div>

@@ -181,11 +181,23 @@
                                 <td th:text="${keHoach.tenKeHoach}"></td>
                                 <td th:text="${keHoach.boMon}"></td>
                                 <td th:text="${keHoach.hocKy}"></td>
-                                <td th:text="${keHoach.trangThai}"></td>
                                 <td th:text="${keHoach.leadKeHoach}"></td>
                                 <td>
-                                    <a th:href="@{/truongbandaotao/chitiet(id=${keHoach.id})}"
-                                       class="btn btn-primary btn-sm">
+    <span th:text="${keHoach.trangThai}"
+          th:classappend="${keHoach.trangThai == 'Đã duyệt'} ? 'badge bg-success' :
+                         (${keHoach.trangThai == 'Từ chối'} ? 'badge bg-danger' : 'badge bg-warning')">
+    </span>
+                                </td>
+                                <td>
+                                    <div th:if="${keHoach.trangThai == 'Chờ duyệt'}">
+                                        <form th:action="@{/truongbandaotao/quanlysukien/pheduyet/{id}(id=${keHoach.id})}" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-warning">Phê duyệt</button>
+                                        </form>
+                                        <form th:action="@{/truongbandaotao/quanlysukien/tuchoi/{id}(id=${keHoach.id})}" method="post" class="d-inline">
+                                            <button type="submit" class="btn btn-danger">Từ chối</button>
+                                        </form>
+                                    </div>
+                                    <a th:href="@{/truongbandaotao/chitiet(id=${keHoach.id})}" class="btn btn-primary btn-sm">
                                         Chi tiết
                                     </a>
                                     <button class="btn btn-success btn-sm">Xuất Excel</button>

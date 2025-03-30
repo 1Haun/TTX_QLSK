@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -72,36 +69,33 @@ public class SuKienController {
         model.addAttribute("keHoach", keHoachOpt.get());
         return "truongbandaotao/chitiet";
     }
-}
 
-//    @PostMapping("/truongbandaotao/quanlysukien/add")
-//    public String addKeHoach(@ModelAttribute KeHoachSuKien kh, RedirectAttributes redirectAttributes) {
-//        try {
-//            System.out.println("🟢 Nhận dữ liệu từ form: " + kh);
-//
-//            // Kiểm tra xem đã có kế hoạch trùng chưa (dựa vào tên hoặc tiêu chí khác)
-//            boolean exists = kHRepository.existsByTenKeHoach(kh.getTenKeHoach());
-//            if (exists) {
-//                redirectAttributes.addFlashAttribute("errorMessage", "Kế hoạch này đã tồn tại!");
-//                return "redirect:/truongbandaotao/quanlysukien";
-//            }
-//
-//            // Lưu vào database
-//            kHRepository.save(kh);
-//
-//            // Kiểm tra lại xem đã có trong DB chưa
-//            Optional<KeHoachSuKien> savedKH = kHRepository.findById(kh.getId());
-//            if (savedKH.isPresent()) {
-//                System.out.println("✅ Đã lưu vào DB: " + savedKH.get());
-//            } else {
-//                System.out.println("❌ Lưu thất bại!");
-//            }
-//
-//            redirectAttributes.addFlashAttribute("successMessage", "Thêm kế hoạch thành công!");
-//        } catch (Exception e) {
-//            redirectAttributes.addFlashAttribute("errorMessage", "Lỗi khi thêm kế hoạch: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//        return "redirect:/truongbandaotao/quanlysukien";
-//    }
+    @PostMapping("truongbandaotao/quanlysukien/pheduyet/{id}")
+    public String pheDuyetKeHoach(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Optional<KeHoachSuKien> optionalKeHoach = kHRepository.findById(id);
+        if (optionalKeHoach.isPresent()) {
+            KeHoachSuKien keHoach = optionalKeHoach.get();
+            keHoach.setTrangThai("Đã duyệt"); // Cập nhật trạng thái
+            kHRepository.save(keHoach); // Lưu vào database
+            redirectAttributes.addFlashAttribute("successMessage", "Kế hoạch đã được phê duyệt.");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy kế hoạch.");
+        }
+        return "redirect:/truongbandaotao/quanlysukien"; // Điều hướng về trang danh sách
+    }
+    @PostMapping("truongbandaotao/quanlysukien/tuchoi/{id}")
+    public String tuChoiKeHoach(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        Optional<KeHoachSuKien> optionalKeHoach = kHRepository.findById(id);
+        if (optionalKeHoach.isPresent()) {
+            KeHoachSuKien keHoach = optionalKeHoach.get();
+            keHoach.setTrangThai("Từ chối"); // Cập nhật trạng thái
+            kHRepository.save(keHoach); // Lưu vào database
+            redirectAttributes.addFlashAttribute("successMessage", "Kế hoạch đã bị từ chối.");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Không tìm thấy kế hoạch.");
+        }
+        return "redirect:/truongbandaotao/quanlysukien"; // Điều hướng về trang danh sách
+    }
+
+}
 
