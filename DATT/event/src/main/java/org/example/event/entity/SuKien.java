@@ -21,14 +21,6 @@ public class SuKien {
     @Column(name = "ma_diem_danh", unique = true, nullable = false)
     private String maDiemDanh;
 
-    // Getter & Setter
-    public String getMaDiemDanh() {
-        return maDiemDanh;
-    }
-
-    public void setMaDiemDanh(String maDiemDanh) {
-        this.maDiemDanh = maDiemDanh;
-    }
 }
 
 
