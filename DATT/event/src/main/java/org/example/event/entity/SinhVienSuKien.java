@@ -1,13 +1,13 @@
 package org.example.event.entity;
 
-
-
 import jakarta.persistence.*;
-import lombok.*;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Table(name = "sinhvien_sukien")
+@Table(name = "sinh_vien_su_kien")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,19 +18,11 @@ public class SinhVienSuKien {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Liên kết với sinh viên (nhiều sự kiện có thể thuộc 1 sinh viên)
-    @ManyToOne
-    @JoinColumn(name = "sinh_vien_id")
+    @ManyToOne(cascade = CascadeType.PERSIST) // Tự động lưu sinh viên nếu chưa có
+    @JoinColumn(name = "sinh_vien_id", nullable = false)
     private SinhVien sinhVien;
 
-    private String theLoai;
-    private String boMon;
-    private String hocKy;
-    private String block;
-    private String chuyenNganh;
-
-    private String mucTieuHuongDenSuKien;
-
-    private LocalDateTime thoiGianBatDau;
+    @ManyToOne
+    @JoinColumn(name = "ke_hoach_su_kien_id", nullable = false)
+    private KeHoachSuKien keHoachSuKien;
 }
-

@@ -26,49 +26,21 @@
                     <div class="row mb-3">
                         <div class="col-md-3">
                             <label class="form-label">Mã sinh viên:</label>
-                            <!-- Gán readonly để không chỉnh sửa -->
-                            <input type="hidden" th:field="*{sinhVien.id}" />
-                            <input type="text" class="form-control" th:value="*{sinhVien.maSinhVien}"  />
+                            <input type="text" class="form-control" th:field="*{sinhVien.maSinhVien}" required />
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Tên sinh viên:</label>
-                            <!-- Gán readonly để không chỉnh sửa -->
-                            <input type="hidden" th:field="*{sinhVien.id}" />
-                            <input type="text" class="form-control" th:value="*{sinhVien.hoTen}"  />
-                        </div>
-
-                        <div class="col-md-3">
-                            <label class="form-label">Thể loại:</label>
-                            <input type="text" class="form-control" th:field="*{theLoai}" required/>
+                            <input type="text" class="form-control" th:field="*{sinhVien.hoTen}" required />
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-md-6">
-                            <label class="form-label">Thời gian bắt đầu:</label>
-                            <input type="datetime-local" class="form-control" th:field="*{thoiGianBatDau}" required/>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Bộ môn:</label>
-                            <input type="text" class="form-control" th:field="*{boMon}" required/>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Block:</label>
-                            <input type="text" class="form-control" th:field="*{block}" required/>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Học kỳ:</label>
-                            <input type="text" class="form-control" th:field="*{hocKy}" required/>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Mục tiêu hướng đến sự kiện:</label>
-                            <input type="text" class="form-control" th:field="*{mucTieuHuongDenSuKien}" required/>
+                            <label class="form-label">Chọn sự kiện:</label>
+                            <select class="form-select" th:field="*{keHoachSuKien.id}" required>
+                                <option value="">-- Chọn kế hoạch sự kiện --</option>
+                                <option th:each="kh : ${keHoachDaDuyet}" th:value="${kh.id}" th:text="${kh.tenKeHoach}"></option>
+                            </select>
                         </div>
                     </div>
 
@@ -77,6 +49,7 @@
                         <button type="reset" class="btn btn-secondary">Xóa</button>
                     </div>
                 </form>
+
                 <!-- Danh sách sự kiện đã đăng ký -->
                 <div class="mt-5">
                     <h3 class="text-center mb-3">Danh Sách Sự Kiện Đã Đăng Ký</h3>
@@ -84,29 +57,22 @@
                     <table class="table table-bordered table-hover text-center">
                         <thead class="table-dark">
                         <tr>
-                            <th>STT</th>
-                            <th>Thể loại</th>
-                            <th>Thời gian</th>
+<!--                            <th>STT</th>-->
+                            <th>Tên kế hoạch</th>
                             <th>Bộ môn</th>
-                            <th>Block</th>
                             <th>Học kỳ</th>
-                            <th>Mục tiêu</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="sk, iterStat : ${suKiens}">
-                            <td th:text="${iterStat.index + 1}"></td>
-                            <td th:text="${sk.theLoai}"></td>
-                            <td th:text="${#temporals.format(sk.thoiGianBatDau, 'dd/MM/yyyy HH:mm')}"></td>
-                            <td th:text="${sk.boMon}"></td>
-                            <td th:text="${sk.block}"></td>
-                            <td th:text="${sk.hocKy}"></td>
-                            <td th:text="${sk.mucTieuHuongDenSuKien}"></td>
+                        <tr th:each="sukien : ${danhSachDangKy}">
+<!--                            <td th:text="${iterStat.index + 1}"></td>-->
+                            <td th:text="${sukien.keHoachSuKien.tenKeHoach}"></td>
+                            <td th:text="${sukien.keHoachSuKien.boMon   }"></td>
+                            <td th:text="${sukien.keHoachSuKien.hocKy}"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>
