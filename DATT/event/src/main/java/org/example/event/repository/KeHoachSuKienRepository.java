@@ -7,7 +7,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface KeHoachSuKienRepository extends JpaRepository<KeHoachSuKien, Long> {
+    List<KeHoachSuKien> findByTrangThai(String trangThai);
 
     @Query("SELECT k FROM KeHoachSuKien k WHERE " +
             "(COALESCE(:tenKeHoach, '') = '' OR LOWER(k.tenKeHoach) LIKE LOWER(CONCAT('%', :tenKeHoach, '%'))) " +

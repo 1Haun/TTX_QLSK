@@ -16,13 +16,11 @@ public class SinhVien {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String maSinhVien;
-    private String hoTen;
-    private String email;
-    private String soDienThoai;
 
-    @OneToMany(mappedBy = "sinhVien", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SinhVienSuKien> danhSachSuKien;
+    @Column(nullable = false)
+    private String hoTen;
 }
 
 
